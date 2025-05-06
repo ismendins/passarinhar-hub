@@ -7,3 +7,5 @@ exports.funcGetAFarm = farmServ.getOneFarm;
 exports.funcPostFarm = farmServ.postNewFarm;
 
 exports.funcDelFarm = farmServ.deleteFarm;
+
+exports.funcExibirMapa = farmServ.exibirMapa;

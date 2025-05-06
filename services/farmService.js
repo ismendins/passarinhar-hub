@@ -1,5 +1,9 @@
 const cliente = require('../config/db');
 
+exports.exibirMapa = (req, res) => {
+  res.render('index.ejs');
+};
+
 exports.getAllFarms = async (req, res) => {
     try {
         let { data } = await cliente.supabase.from('fazenda').select('*');

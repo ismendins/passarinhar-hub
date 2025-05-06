@@ -17,6 +17,7 @@ class Farm {
         this.cidade = cidade;
         this.estado = estado;
         this.cep = cep;
+        
     }
 }
 

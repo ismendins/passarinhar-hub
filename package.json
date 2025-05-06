@@ -19,8 +19,12 @@
   },
   "homepage": "https://github.com/ismendins/passarinhar-hub#readme",
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.4.1",
     "@supabase/supabase-js": "^2.49.4",
+    "axios": "^1.9.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
     "express": "^5.1.0",
     "nodemon": "^3.1.10",
     "supabase": "^2.22.6"
