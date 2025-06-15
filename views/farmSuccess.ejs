@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <%- include('partials/head', { title: 'Cadastro de Fazenda - Sucesso' }) %>
+  <%- include('partials/header') %>
+
+  <div class="container mt-5 d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow p-4" style="background-color: #f0f0f0; max-width: 700px; width: 100%;">
+      <h3 class="text-center mb-4 text-success">Fazenda Criada com Sucesso!</h3>
+      <p class="text-center">A fazenda foi cadastrada com sucesso no sistema. Agora você pode criar uma nova fazenda ou voltar para a página inicial.</p>
+      
+      <div class="d-flex justify-content-center gap-3">
+        <a href="/cadastro-fazenda" class="btn btn-outline-success btn-sm">Criar Nova Fazenda</a>
+        <a href="/homepage" class="btn btn-outline-primary btn-sm">Voltar para a Página Inicial</a>
+      </div>
+    </div>
+  </div>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

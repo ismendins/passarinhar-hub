@@ -1,0 +1,197 @@
+#map {
+  height: 500px;
+  width: 80%;
+  margin: 20px auto;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.card-img-overlay {
+  background: rgba(122, 117, 117, 0.5); /* Fundo semi-transparente */
+  border-radius: 10px; /* Bordas arredondadas */
+  padding: 15px; /* Espaçamento interno */
+}
+.card-title {
+  font-size: 1.25rem; /* Tamanho do título */
+}
+.card-text {
+  font-size: 0.875rem; /* Tamanho do texto */
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
+h1 {
+  color: #2d3e50;
+  text-align: center;
+}
+
+.custom-carousel {
+  max-height: 400px; /* ou qualquer valor desejado */
+  overflow: hidden;
+}
+
+.custom-carousel .carousel-item img {
+  height: 400px; /* ou qualquer valor desejado */
+  object-fit: cover;
+}
+.carousel-caption {
+  background-color: rgba(
+    220,
+    220,
+    220,
+    0.75
+  ); /* fundo cinza claro translúcido */
+  color: black !important; /* texto preto */
+  padding: 1rem;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.login-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 2px solid #ddd; /* Bordas cinzas */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.login-container .form-group {
+  margin-bottom: 15px;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login-container button:hover {
+  background-color: #45a049;
+}
+
+.error-message {
+  color: red;
+  margin-top: 15px;
+  text-align: center;
+}
+
+p {
+  text-align: center;
+}
+
+.form-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ddd;
+}
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border: 1px solid #f5c6cb;
+  margin-top: 20px;
+  border-radius: 4px;
+}
+
+p {
+  text-align: center;
+  margin-top: 20px;
+}
+.dropdown-menu {
+  min-width: 200px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+
+.dropdown-item.text-danger:hover {
+  background-color: #f8d7da;
+  color: #721c24 !important;
+}
+
+.btn-dark {
+  background-color: #1e4620 !important;
+  border-color: #1e4620 !important;
+}
+
+.btn-dark:hover {
+  background-color: #155518 !important;
+  border-color: #155518 !important;
+}
+
+.dropdown-header {
+  font-weight: 600;
+  color: #198754 !important;
+}

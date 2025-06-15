@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<%- include('partials/head', { title: 'Login' }) %>
+<%- include('partials/header') %>
+<body>
+  <div class="login-container">
+    <h2>Login</h2>
+
+    <form action="/auth/login" method="POST">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="senha">Senha:</label>
+        <input type="password" name="senha" id="senha" required>
+      </div>
+
+      <button type="submit">Entrar</button>
+    </form>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="error-message">
+        <p><%= error %></p>
+      </div>
+    <% } %>
+
+    <p>Ainda não tem uma conta? <a href="/users/register">Cadastre-se</a></p>
+  </div>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

@@ -3,10 +3,11 @@ class Farm {
         visita_agendamento, ativa, logradouro, numero, complemento, bairro, cidade, estado, cep)
         {
         this.nome = nome;
+        this.owner_id = owner_id;
         this.descricao = descricao;
         this.area_total = area_total;
         this.latitude = latitude;
-        this.longitude = longitude = longitude;
+        this.longitude = longitude;
         this.visitas_permitidas = visitas_permitidas;
         this.visita_agendamento = visita_agendamento;
         this.ativa = ativa;
@@ -17,7 +18,6 @@ class Farm {
         this.cidade = cidade;
         this.estado = estado;
         this.cep = cep;
-        
     }
 }
 
