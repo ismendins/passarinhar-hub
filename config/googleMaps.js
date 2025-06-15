@@ -1,12 +1,7 @@
-const dotenv = require('dotenv').config();
-const axios = require('axios');
+const { Client } = require('@googlemaps/google-maps-services-js');
 
-const MAPS_API_KEY = process.env.MAPS_API_KEY;
-const url_mapas = process.env.url_mapas;
+const MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 
-const googleMapsApi = {
-    baseUrl: url_mapas,
-    api_key: MAPS_API_KEY,
-}
+const googleMapsClient = new Client({});
 
-module.exports = googleMapsApi;
+module.exports = googleMapsClient;

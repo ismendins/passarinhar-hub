@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <%- include('partials/head', { title: 'Passarinhar Hub' }) %>
+  <%- include('partials/header') %>
+  <body>
+  <div class="container mt-5">
+
+    <section class="intro-section mb-5">
+      <h2 class="text-center mb-4">Bem-vindo ao Passarinhar Hub!</h2>
+      <p class="text-center lead">
+        O Passarinhar Hub é o lugar perfeito para guias de passarinhada e proprietários de fazendas que desejam promover o ecoturismo. Nossa plataforma conecta profissionais experientes na observação de aves com proprietários de áreas naturais que buscam compartilhar seus espaços com amantes da natureza.
+      </p>
+    </section>
+
+<div id="imageCarousel" class="carousel slide mb-4 custom-carousel" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="/img/araripe.jpeg" class="d-block w-100" alt="Soldadinho do Araripe">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Soldadinho do Araripe</h5>
+        <p>Única ave endêmica do Ceará e ameaçado de extinção, o Soldadinho do Araripe é conhecido por sua cor exuberante.</p>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <img src="/img/uru.jpg" class="d-block w-100" alt="Uru-do-Nordeste">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Uru-do-Nordeste</h5>
+        <p>Subspécie do Uru Capoeira, é uma ave que aparece na região da serra de Baturité e está ameaçada de extinção.</p>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <img src="/img/Guaramiranga.jpg" class="d-block w-100" alt="Guaramiranga">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Uirapuru-laranja</h5>
+        <p>Conhecido popularmente como Guaramiranga, que significa "pássaro vermelho" em Tupi, é o pássaro que dá nome para a região.</p>
+      </div>
+    </div>
+  </div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+    <section class="row mb-5">
+      <div class="col-md-6 mb-4">
+        <h4 class="text-center">Para os Guias de Passarinhada</h4>
+        <p>
+          Encontre propriedades em locais privilegiados, com fauna rica e biodiversidade única, prontas para receber grupos de ecoturismo. Ofereça suas experiências personalizadas e ajude os visitantes a vivenciarem momentos incríveis em meio à natureza.
+        </p>
+      </div>
+      <div class="col-md-6 mb-4">
+        <h4 class="text-center">Para os Proprietários</h4>
+        <p>
+          Se você possui uma fazenda, reserva natural ou qualquer área rica em vida selvagem, o Passarinhar Hub é a ponte ideal para atrair turistas apaixonados por aves e natureza. Aproveite o potencial do ecoturismo para gerar renda sustentável, enquanto preserva o meio ambiente.
+        </p>
+      </div>
+    </section>
+
+  <section class="container mt-5">
+  <div class="row">
+      <div class="col-md-4 mb-4">
+      <div class="card">
+        <img src="/img/rio-floresta.jpg" class="card-img-top" alt="Fazenda de Manoel Chicó">
+        <div class="card-img-overlay d-flex justify-content-center align-items-center text-center" style="background: rgba(0, 0, 0, 0.5);">
+          <div class="text-white">
+            <h5 class="card-title">Fazenda Ventura</h5>
+            <p class="card-text">Fazenda próxima da Lagoa de Almécegas em Paraipaba, com vegetação de restinga e rica diversidade de aves.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <img src="/img/caatinga.jpg" class="card-img-top" alt="Fazenda do Zé do Canto">
+        <div class="card-img-overlay d-flex justify-content-center align-items-center text-center" style="background: rgba(0, 0, 0, 0.5);">
+          <div class="text-white">
+            <h5 class="card-title">Fazenda do Zé do Canto</h5>
+            <p class="card-text">Localizada em um ambiente natural exuberante na Caatinga Cearense, perfeita para observação de aves.</p>
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <section id="mapa-localizacao" class="mb-5">
+      <h2 class="text-center mb-4">Onde Encontrar as Fazendas</h2>
+      <div id="map" style="height: 500px; border-radius: 8px;"></div>
+    </section>
+
+    <script>
+      async function initMap() {
+        const defaultCenter = { lat: -3.71722, lng: -38.54322 };
+        const { Map } = await google.maps.importLibrary("maps");
+        const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+        map = new Map(document.getElementById("map"), {
+          zoom: 9,
+          center: defaultCenter,
+          mapId: "PassarinharHub",
+        });
+
+        loadFarmMarkers();
+      }
+
+      async function loadFarmMarkers() {
+        try {
+          const response = await fetch('/map/map');
+          const farms = await response.json();
+          farms.forEach(createMarker);
+        } catch (error) {
+          console.error("Erro ao buscar fazendas:", error);
+        }
+      }
+
+      function createMarker(farm) {
+        const position = { lat: farm.latitude, lng: farm.longitude };
+        const marker = new google.maps.Marker({
+          position,
+          map,
+          title: farm.nome,
+        });
+
+        const info = `
+          <h3>${farm.nome}</h3>
+          <p>${farm.descricao}</p>
+          <p>Área: ${farm.area_total} ha</p>
+        `;
+
+        const infoWindow = new google.maps.InfoWindow({ content: info });
+        marker.addListener("click", () => infoWindow.open(map, marker));
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQibWbhMIzvPXNPWpsmFDcjpgLwPJoSlM&callback=initMap&libraries=places,geometry" async defer></script>
+
+  </div>
+
+  <%- include('partials/footer') %>
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<%- include('partials/head', { title: 'Cadastro de Fazenda' }) %>
+<%- include('partials/header') %>
+<div class="container mt-5 d-flex justify-content-center align-items-center min-vh-100">  <div class="card shadow p-4" style="background-color: #f0f0f0; max-width: 700px; width: 100%;">
+    <h3 class="text-center mb-4">Cadastro de Fazenda</h3>
+
+    <form action="/farms/createFarm" method="POST">
+      <div class="mb-3">
+        <label for="nome" class="form-label">Nome:</label>
+        <input type="text" class="form-control" name="nome" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="descricao" class="form-label">Descrição:</label>
+        <textarea class="form-control" name="descricao" rows="3"></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="area_total" class="form-label">Área Total (ha):</label>
+        <input type="number" step="0.01" class="form-control" name="area_total">
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="latitude" class="form-label">Latitude:</label>
+          <input type="text" class="form-control" name="latitude" id="latitude">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="longitude" class="form-label">Longitude:</label>
+          <input type="text" class="form-control" name="longitude" id="longitude">
+        </div>
+      </div>
+
+      <div class="form-check mb-2">
+        <input class="form-check-input" type="checkbox" name="visitas_permitidas" value="true" id="visitas_permitidas">
+        <label class="form-check-label" for="visitas_permitidas">Visitas Permitidas</label>
+      </div>
+
+      <div class="form-check mb-2">
+        <input class="form-check-input" type="checkbox" name="visita_agendamento" value="true" id="visita_agendamento">
+        <label class="form-check-label" for="visita_agendamento">Agendamento de Visitas</label>
+      </div>
+
+      <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" name="ativa" value="true" id="ativa">
+        <label class="form-check-label" for="ativa">Fazenda Ativa</label>
+      </div>
+
+      <hr>
+
+      <h5 class="mb-3">Endereço</h5>
+
+      <div class="row">
+      <div class="col-md-8 mb-3">
+      <label for="logradouro" class="form-label">Logradouro:</label>
+      <input type="text" class="form-control" name="logradouro" id="logradouro">
+    </div>
+    <div class="col-md-4 mb-3">
+    <label for="numero" class="form-label">Número:</label>
+    <input type="text" class="form-control" name="numero" id="numero">
+  </div>
+</div>
+
+<div class="mb-3">
+  <label for="complemento" class="form-label">Complemento:</label>
+  <input type="text" class="form-control" name="complemento" id="complemento">
+</div>
+
+<div class="row">
+  <div class="col-md-6 mb-3">
+    <label for="bairro" class="form-label">Bairro:</label>
+    <input type="text" class="form-control" name="bairro" id="bairro">
+  </div>
+  <div class="col-md-6 mb-3">
+    <label for="cidade" class="form-label">Cidade:</label>
+    <input type="text" class="form-control" name="cidade" id="cidade" required>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 mb-3">
+    <label for="estado" class="form-label">Estado:</label>
+    <input type="text" class="form-control" name="estado" id="estado" required>
+  </div>
+  <div class="col-md-6 mb-3">
+    <label for="cep" class="form-label">CEP:</label>
+    <input type="text" class="form-control" name="cep" id="cep">
+  </div>
+</div>
+
+      <div class="d-flex justify-content-center mb-3">
+        <button type="button" class="btn btn-outline-primary btn-sm" id="buscar-endereco">Buscar endereço</button>
+      </div>
+      <p id="coordenadas" class="text-center small text-muted"></p>
+
+      <input type="hidden" name="owner_id" value="123">
+
+      <div class="d-flex justify-content-end gap-2">
+        <a href="/homepage" class="btn btn-secondary btn-sm">Cancelar</a>
+        <button type="submit" class="btn btn-success btn-sm">Criar Fazenda</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQibWbhMIzvPXNPWpsmFDcjpgLwPJoSlM&callback=initMap&libraries=places,geometry" async defer></script>
+
+  <script>
+    let geocoder;
+
+    function initMap() {
+      geocoder = new google.maps.Geocoder();
+    }
+
+    function reverseGeocodeCoordinates() {
+      const latitude = document.getElementById("latitude").value;
+      const longitude = document.getElementById("longitude").value;
+
+      if (latitude && longitude) {
+        const latLng = new google.maps.LatLng(latitude, longitude);
+        geocoder.geocode({ 'location': latLng }, function(results, status) {
+          if (status === 'OK' && results[0]) {
+            const addressComponents = results[0].address_components;
+
+            addressComponents.forEach(component => {
+              if (component.types.includes("route")) {
+                document.getElementById("logradouro").value = component.long_name;
+              }
+              if (component.types.includes("street_number")) {
+                document.getElementById("numero").value = component.long_name;
+              }
+              if (component.types.includes("neighborhood")) {
+                document.getElementById("bairro").value = component.long_name;
+              }
+              if (component.types.includes("locality")) {
+                document.getElementById("cidade").value = component.long_name;
+              }
+              if (component.types.includes("administrative_area_level_1")) {
+                document.getElementById("estado").value = component.long_name;
+              }
+              if (component.types.includes("postal_code")) {
+                document.getElementById("cep").value = component.long_name;
+              }
+            });
+          } else {
+            console.error("Geocodificação reversa falhou: " + status);
+          }
+        });
+      } else {
+        console.error("Por favor, insira latitude e longitude válidas.");
+      }
+    }
+
+    document.getElementById("buscar-endereco").addEventListener("click", reverseGeocodeCoordinates);
+  </script>
+  <%- include('partials/footer') %>
+</body>
+</html>
